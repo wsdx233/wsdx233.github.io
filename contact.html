@@ -19,12 +19,33 @@
     <div class="container">
         <div class="content">
             <h2>联系我</h2>
-            <p>如果您想要联系我，请发送电子邮件至：18082792459@163.com</p>
-            <p>QQ：1284321744</p>
+            <div class="card">
+                <p>Email: <span id="email">18082792459@163.com</span> <button onclick="copyToClipboard('18082792459@163.com')">复制</button></p>
+            </div>
+            <div class="card">
+                <p>QQ: <span id="qq">1284321744</span> <button onclick="copyToClipboard('1284321744')">复制</button></p>
+            </div>
+            
+            <div class="card">
+                <p>BiliBili: <span id="bilibili">@wsdx233</span> <button onclick="copyToClipboard('wsdx233')">复制</button></p>
+            </div>
         </div>
     </div>
     <footer>
         &copy; 2023 Wsdx233
     </footer>
+
+    <script>
+        function copyToClipboard(textToCopy) {
+            var textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+
+            textArea.select();
+            document.execCommand('copy');
+            
+            document.body.removeChild(textArea);
+        }
+    </script>
 </body>
 </html>
