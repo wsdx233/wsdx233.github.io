@@ -66,3 +66,27 @@ footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 15px;
 }
+
+.content {
+  margin-top: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: #00bfff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
