@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript在线编辑器</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #container {
+      display: flex;
+      flex: 1;
+      gap: 20px;
+    }
+
+    #editor-container {
+      flex: 1;
+      height: 80vh;
+      border: 1px solid #ccc;
+    }
+
+    #output {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      overflow-y: auto;
+      background-color: #f5f5f5;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<button onclick="runCode()">运行代码 (Ctrl+Enter)</button>
+<div id="container">
+  <div id="editor-container"></div>
+  <div id="output"></div>
+</div>
+
+<!-- 引入Monaco Editor -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.min.js"></script>
+<script>
+  // 初始化Monaco Editor
+  require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs' }});
+  require(['vs/editor/editor.main'], function() {
+    window.editor = monaco.editor.create(document.getElementById('editor-container'), {
+      value: '// 输入你的JavaScript代码\nconsole.log("Hello World!");\n\n// 试试点击运行按钮',
+      language: 'javascript',
+      theme: 'vs-dark',
+      automaticLayout: true,
+      minimap: {
+        enabled: false
+      }
+    });
+
+    // 添加快捷键监听
+    window.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode);
+  });
+
+  // 运行代码函数
+  function runCode() {
+    const code = window.editor.getValue();
+    const output = document.getElementById('output');
+    output.innerHTML = ''; // 清空之前的结果
+
+    try {
+      // 重写console.log以捕获输出
+      const oldLog = console.log;
+      console.log = function(...args) {
+        output.innerHTML += args.join(' ') + '<br>';
+        oldLog.apply(console, args);
+      };
+
+      // 执行代码
+      eval(code);
+    } catch (error) {
+      output.innerHTML = `<span style="color: red">错误: ${error}</span>`;
+    } finally {
+      console.log = oldLog; // 恢复原始console.log
+    }
+  }
+</script>
+</body>
+</html>
