@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometric Survivor</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #111; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        canvas { display: block; background-color: #222; }
+        #upgradeMenu {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.85);
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            font-family: sans-serif;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        #upgradeMenu h2 {
+            margin-top: 0;
+            color: #4CAF50; /* Green accent */
+        }
+        .upgradeOption {
+            background-color: #444;
+            border: 1px solid #888;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 250px;
+            text-align: center;
+        }
+        .upgradeOption:hover {
+            background-color: #555;
+            transform: scale(1.05);
+            border-color: #fff;
+        }
+        .upgradeOption h3 { margin: 0 0 5px 0; color: #ddd;}
+        .upgradeOption p { margin: 0; font-size: 0.9em; color: #bbb;}
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <div id="upgradeMenu">
+        <h2>Level Up! Choose an Upgrade:</h2>
+        <div id="upgradeOptionsContainer">
+             <!-- Options will be added here by JS -->
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
